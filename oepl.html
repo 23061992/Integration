@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#4CAF50" />
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OPTICS LAB</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    select, textarea, button {
+      display: block;
+      margin: 0 auto 15px;
+      width: 100%;
+      max-width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      text-align: center;       /* Align text inside dropdown */
+      text-align-last: center;  /* Align selected value */
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 16px;
+      color: green;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="logo.png" alt="Logo" />
+    </div>
+
+    <h2>OPTICS INTEGRATION </h2>
+
+        <select id="testType">
+      <option value="">-- Project --</option>
+      <option value="voltage">NOCTVISION</option>
+      <option value="Current Test">CLEARVISION</option>
+      <option value="Continuity Test">WOLFSIGHT</option>
+    </select>
+
+      <select id="status">
+      <option value="">-- Test parameters --</option>
+      <option value="Pass">SUB ASSEMBLY CHECKLIST</option>
+      <option value="Fail">INTEGRATION CHECKLIST</option>
+      <option value="Re-Test">FINAL TEST REPORT</option>
+    </select>
+
+    <label for="remarks">Remarks:</label>
+    <textarea id="remarks" rows="3" placeholder="Enter any remarks..."></textarea>
+
+    <button onclick="submitForm()">Submit</button>
+
+    <div id="output"></div>
+  </div>
+
+<script>
+  
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('Service Worker Registered', reg))
+      .catch(err => console.error('SW registration failed:', err));
+  }
+
+
+function submitForm() {
+  const project = document.getElementById('testType').value;
+  const testParam = document.getElementById('status').value;
+  const remarks = document.getElementById('remarks').value;
+
+  if (!project || !testParam) {
+    alert("Please select both project and test parameters.");
+    return;
+  }
+
+  // Format file names based on selection (example format)
+  let filename = "";
+
+  if (project === "voltage" && testParam === "Pass") {
+    filename = "subassychknoctvision.html";
+  } else if (project === "voltage" && testParam === "Fail") {
+    filename = "intchknoctvision.html";
+  } else if (project === "voltage" && testParam === "Re-Test") {
+    filename = "testresnoctvision.html";
+  }
+
+  else if (project === "Current Test" && testParam === "Pass") {
+    filename = "subassychkclearvision.html";
+  } else if (project === "Current Test" && testParam === "Fail") {
+    filename = "intchkclearvision.html";
+  } else if (project === "Current Test" && testParam === "Re-Test") {
+    filename = "testresclearvision.html";
+  }
+
+  else if (project === "Continuity Test" && testParam === "Pass") {
+    filename = "subassychkwolfsight.html";
+  } else if (project === "Continuity Test" && testParam === "Fail") {
+    filename = "intchkwolfsight.html";
+  } else if (project === "Continuity Test" && testParam === "Re-Test") {
+    filename = "testreswolfsight.html";
+  }
+
+  // If filename was matched, redirect
+  if (filename) {
+    window.location.href = filename;
+  } else {
+    alert("No matching page found for selected combination.");
+  }
+}
+</script>
+
+
+</body>
+</html>

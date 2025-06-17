@@ -126,6 +126,42 @@ th:nth-child(5), td:nth-child(5),
 th:nth-child(6), td:nth-child(6) {
   width: 15%;
 }
+.image-container {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  margin-top: 5px;
+}
+
+.image-container img {
+  max-height: 100px;
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+@media print {
+  .no-print,
+  .delete-icon {
+    display: none !important;
+  }
+}
+
 
   </style>
 </head>
@@ -234,8 +270,8 @@ th:nth-child(6), td:nth-child(6) {
         <label for="nfov-input-${index}" style="cursor:pointer;">Choose File</label>
         <br>
         <img id="nfov-${index}" src="" alt="" style="max-height:100px; max-width:100%; display:none; margin: 5px auto;" />
-
-
+        <br>
+        <button onclick="deleteImage('nfov-${index}', 'nfov-input-${index}')" style="display:none;" id="delete-nfov-${index}">Delete</button>
       </td>
       <td>
         <input type="file" accept="image/*" onchange="previewImage(event, 'wfov-${index}')"
@@ -243,8 +279,8 @@ th:nth-child(6), td:nth-child(6) {
         <label for="wfov-input-${index}" style="cursor:pointer;">Choose File</label>
         <br>
         <img id="wfov-${index}" src="" alt="" style="max-height:100px; max-width:100%; display:none; margin: 5px auto;" />
-
-
+        <br>
+        <button onclick="deleteImage('wfov-${index}', 'wfov-input-${index}')" style="display:none;" id="delete-wfov-${index}">Delete</button>
       </td>
       <td><input type="text" class="remark-input" style="text-align: center;" placeholder="Deviation" /></td>
       <td class="tick-cell" onclick="toggleTick(this)"></td>
@@ -257,26 +293,39 @@ th:nth-child(6), td:nth-child(6) {
   }
 
   function previewImage(event, imgId) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = document.getElementById(imgId);
-      img.src = e.target.result;
-      img.style.display = "block";
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.getElementById(imgId);
+        img.src = e.target.result;
+        img.style.display = "block";
 
-      // Hide the label after uploading
-      const inputId = event.target.id;
-      const label = document.querySelector(`label[for="${inputId}"]`);
-      if (label) {
-        label.style.display = "none";
-      }
-    };
-    reader.readAsDataURL(file);
+        const inputId = event.target.id;
+        const label = document.querySelector(`label[for="${inputId}"]`);
+        const deleteButton = document.getElementById("delete-" + imgId);
+
+        if (label) label.style.display = "none";
+        if (deleteButton) deleteButton.style.display = "inline-block";
+      };
+      reader.readAsDataURL(file);
+    }
   }
-}
 
+  function deleteImage(imgId, inputId) {
+    const img = document.getElementById(imgId);
+    const input = document.getElementById(inputId);
+    const label = document.querySelector(`label[for="${inputId}"]`);
+    const deleteButton = document.getElementById("delete-" + imgId);
+
+    img.src = "";
+    img.style.display = "none";
+    input.value = "";
+    if (label) label.style.display = "inline";
+    if (deleteButton) deleteButton.style.display = "none";
+  }
 </script>
+
 
 
 <div style="text-align: center; margin-top: 20px;">

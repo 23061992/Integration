@@ -102,72 +102,66 @@
       outline: none;
       border-color: #000;
     }
+
     .remark-cell {
-  outline: none;
-  border: none;
-  text-align: left;
-  padding: 6px;
-}
- @media print {
-    .no-print {
-      display: none !important;
+      outline: none;
+      border: none;
+      text-align: left;
+      padding: 6px;
     }
-  }
-  th:nth-child(2), td:nth-child(2) {
-  width: 20%;
-}
 
-th:nth-child(3), td:nth-child(3),
-th:nth-child(4), td:nth-child(4) {
-  width: 25%;
-}
+    .image-container {
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+      margin-top: 5px;
+    }
 
-th:nth-child(5), td:nth-child(5),
-th:nth-child(6), td:nth-child(6) {
-  width: 15%;
-}
-.image-container {
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-  margin-top: 5px;
-}
+    .image-container img {
+      max-height: 100px;
+      max-width: 100%;
+      display: block;
+      margin: auto;
+    }
 
-.image-container img {
-  max-height: 100px;
-  max-width: 100%;
-  display: block;
-  margin: auto;
-}
+    .delete-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      display: none;
+    }
 
-.delete-icon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: red;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 12px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  display: none;
-}
+    @media print {
+      .no-print,
+      .delete-icon {
+        display: none !important;
+      }
+    }
 
-@media print {
-  .no-print,
-  .delete-icon {
-    display: none !important;
-  }
-}
+    th:nth-child(2), td:nth-child(2) {
+      width: 20%;
+    }
 
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(4), td:nth-child(4) {
+      width: 25%;
+    }
 
+    th:nth-child(5), td:nth-child(5),
+    th:nth-child(6), td:nth-child(6) {
+      width: 15%;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Header Section -->
   <div class="header">
     <img src="logo.png" alt="Company Logo" class="logo" />
     <div class="header-title">
@@ -175,50 +169,38 @@ th:nth-child(6), td:nth-child(6) {
     </div>
   </div>
 
-  <!-- Form Info -->
   <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-    <div><strong>Form No:</strong> OEPL/CLRV/TES_RES/001  
-</div>
+    <div><strong>Form No:</strong> OEPL/CLRV/TES_RES/001</div>
     <div><strong>Rev:</strong> 00</div>
   </div>
 
-  <!-- Date and Unit Sl No -->
   <div style="display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
     <div><strong>Date:</strong> 10-Apr-2025</div>
     <div style="display: flex; align-items: center; gap: 8px;">
       <strong>Unit Sl. No:</strong>
-      <input type="text" placeholder="CVXXXX" style="width: 150px; text-align: center;" />
+      <input type="text" placeholder="CVXXXX" style="width: 70px; text-align: center;" />
     </div>
   </div>
 
-  <!-- Checklist Table -->
   <table>
     <thead>
-  <tr>
-    <th style="width: 5%;">SL NO</th>
-    <th style="width: 20%;">ACTIVITY</th>
-    <th style="width: 25%;">NFOV</th>
-    <th style="width: 25%;">WFOV</th>
-    <th style="width: 15%;">DEVIATION</th>
-    <th style="width: 10%;">RESULTS</th>
-  </tr>
-</thead>
-
-<tbody id="checklistBody"></tbody>
-
-
+      <tr>
+        <th style="width: 5%;">SL NO</th>
+        <th style="width: 20%;">ACTIVITY</th>
+        <th style="width: 25%;">NFOV</th>
+        <th style="width: 25%;">WFOV</th>
+        <th style="width: 15%;">DEVIATION</th>
+        <th style="width: 10%;">RESULTS</th>
+      </tr>
+    </thead>
+    <tbody id="checklistBody"></tbody>
   </table>
 
-<!-- PCB Details Table -->
-
-
-  <!-- Final Remarks -->
   <div style="margin-top: 20px;">
     <label for="finalRemarks"><strong>Remarks:</strong></label><br />
     <textarea id="finalRemarks" placeholder=""></textarea>
   </div>
 
-  <!-- Sign-Off Section -->
   <div class="signoff-row">
     <div style="display: flex; align-items: center; gap: 10px;">
       <label><strong>Performed by:</strong></label>
@@ -231,7 +213,6 @@ th:nth-child(6), td:nth-child(6) {
       <label><strong>Date:</strong></label>
       <input type="date" />
     </div>
-
     <div style="display: flex; align-items: center; gap: 10px;">
       <label><strong>Verified by:</strong></label>
       <select>
@@ -243,97 +224,90 @@ th:nth-child(6), td:nth-child(6) {
     </div>
   </div>
 
-  <!-- Checklist JS -->
   <script>
-  const checks = [
-    "Thermal image after Boresight",
-    "Visible image after Boresight",
-    "Laser image after Boresight",
-    "Thermal image after Gluing DP190",
-    "Visible image after Gluing DP190",
-    "Laser image after Gluing DP190",
-    "Thermal image after final assembly",
-    "Visible image after final assembly",
-    "Laser image after final assyembly"
-  ];
+    const checks = [
+      "Thermal image after Boresight",
+      "Visible image after Boresight",
+      "Laser image after Boresight",
+      "Thermal image after Gluing DP190",
+      "Visible image after Gluing DP190",
+      "Laser image after Gluing DP190",
+      "Thermal image after final assembly",
+      "Visible image after final assembly",
+      "Laser image after final assyembly"
+    ];
 
-  const tableBody = document.getElementById("checklistBody");
+    const tableBody = document.getElementById("checklistBody");
 
-  checks.forEach((item, index) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${item}</td>
-      <td>
-        <input type="file" accept="image/*" onchange="previewImage(event, 'nfov-${index}')"
-               style="display:none;" id="nfov-input-${index}">
-        <label for="nfov-input-${index}" style="cursor:pointer;">Choose File</label>
-        <br>
-        <img id="nfov-${index}" src="" alt="" style="max-height:100px; max-width:100%; display:none; margin: 5px auto;" />
-        <br>
-        <button onclick="deleteImage('nfov-${index}', 'nfov-input-${index}')" style="display:none;" id="delete-nfov-${index}">Delete</button>
-      </td>
-      <td>
-        <input type="file" accept="image/*" onchange="previewImage(event, 'wfov-${index}')"
-               style="display:none;" id="wfov-input-${index}">
-        <label for="wfov-input-${index}" style="cursor:pointer;">Choose File</label>
-        <br>
-        <img id="wfov-${index}" src="" alt="" style="max-height:100px; max-width:100%; display:none; margin: 5px auto;" />
-        <br>
-        <button onclick="deleteImage('wfov-${index}', 'wfov-input-${index}')" style="display:none;" id="delete-wfov-${index}">Delete</button>
-      </td>
-      <td><input type="text" class="remark-input" style="text-align: center;" placeholder="Deviation" /></td>
-      <td class="tick-cell" onclick="toggleTick(this)"></td>
-    `;
-    tableBody.appendChild(row);
-  });
+    checks.forEach((item, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${item}</td>
+        <td>
+          <input type="file" accept="image/*" onchange="previewImage(event, 'nfov-${index}')" style="display:none;" id="nfov-input-${index}">
+          <label for="nfov-input-${index}" style="cursor:pointer;">Choose File</label>
+          <div class="image-container">
+            <img id="nfov-${index}" src="" alt="" style="display:none;" />
+            <button type="button" class="delete-icon no-print" id="delete-nfov-${index}" onclick="deleteImage('nfov-${index}', 'nfov-input-${index}')">×</button>
+          </div>
+        </td>
+        <td>
+          <input type="file" accept="image/*" onchange="previewImage(event, 'wfov-${index}')" style="display:none;" id="wfov-input-${index}">
+          <label for="wfov-input-${index}" style="cursor:pointer;">Choose File</label>
+          <div class="image-container">
+            <img id="wfov-${index}" src="" alt="" style="display:none;" />
+            <button type="button" class="delete-icon no-print" id="delete-wfov-${index}" onclick="deleteImage('wfov-${index}', 'wfov-input-${index}')">×</button>
+          </div>
+        </td>
+        <td><input type="text" class="remark-input" style="text-align: center;" placeholder="Deviation" /></td>
+        <td class="tick-cell" onclick="toggleTick(this)"></td>
+      `;
+      tableBody.appendChild(row);
+    });
 
-  function toggleTick(cell) {
-    cell.textContent = cell.textContent === '✓' ? '' : '✓';
-  }
-
-  function previewImage(event, imgId) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = document.getElementById(imgId);
-        img.src = e.target.result;
-        img.style.display = "block";
-
-        const inputId = event.target.id;
-        const label = document.querySelector(`label[for="${inputId}"]`);
-        const deleteButton = document.getElementById("delete-" + imgId);
-
-        if (label) label.style.display = "none";
-        if (deleteButton) deleteButton.style.display = "inline-block";
-      };
-      reader.readAsDataURL(file);
+    function toggleTick(cell) {
+      cell.textContent = cell.textContent === '✓' ? '' : '✓';
     }
-  }
 
-  function deleteImage(imgId, inputId) {
-    const img = document.getElementById(imgId);
-    const input = document.getElementById(inputId);
-    const label = document.querySelector(`label[for="${inputId}"]`);
-    const deleteButton = document.getElementById("delete-" + imgId);
+    function previewImage(event, imgId) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById(imgId);
+          img.src = e.target.result;
+          img.style.display = "block";
 
-    img.src = "";
-    img.style.display = "none";
-    input.value = "";
-    if (label) label.style.display = "inline";
-    if (deleteButton) deleteButton.style.display = "none";
-  }
-</script>
+          const inputId = event.target.id;
+          const label = document.querySelector(`label[for="${inputId}"]`);
+          const deleteIcon = document.getElementById("delete-" + imgId);
 
+          if (label) label.style.display = "none";
+          if (deleteIcon) deleteIcon.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    }
 
+    function deleteImage(imgId, inputId) {
+      const img = document.getElementById(imgId);
+      const input = document.getElementById(inputId);
+      const label = document.querySelector(`label[for="${inputId}"]`);
+      const deleteIcon = document.getElementById("delete-" + imgId);
 
-<div style="text-align: center; margin-top: 20px;">
-  <button onclick="window.print()" class="no-print" style="padding: 8px 16px; font-size: 16px; cursor: pointer;">
-    Print
-  </button>
-</div>
+      img.src = "";
+      img.style.display = "none";
+      input.value = "";
+      if (label) label.style.display = "inline";
+      if (deleteIcon) deleteIcon.style.display = "none";
+    }
+  </script>
 
-
+  <div style="text-align: center; margin-top: 20px;">
+    <button onclick="window.print()" class="no-print" style="padding: 8px 16px; font-size: 16px; cursor: pointer;">
+      Print
+    </button>
+  </div>
 </body>
 </html>

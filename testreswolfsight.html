@@ -249,7 +249,7 @@
         <td>${item}</td>
         <td>
           <input type="file" accept="image/*" onchange="previewImage(event, 'nfov-${index}')" style="display:none;" id="nfov-input-${index}">
-          <label for="nfov-input-${index}" style="cursor:pointer;">Choose File</label>
+          <label for="nfov-input-${index}" style="cursor:pointer;">Not Applicable</label>
           <div class="image-container">
             <img id="nfov-${index}" src="" alt="" style="display:none;" />
             <button type="button" class="delete-icon no-print" id="delete-nfov-${index}" onclick="deleteImage('nfov-${index}', 'nfov-input-${index}')">×</button>
@@ -257,13 +257,13 @@
         </td>
         <td>
           <input type="file" accept="image/*" onchange="previewImage(event, 'wfov-${index}')" style="display:none;" id="wfov-input-${index}">
-          <label for="wfov-input-${index}" style="cursor:pointer;">Choose File</label>
+          <label for="wfov-input-${index}" style="cursor:pointer;">Not Applicable</label>
           <div class="image-container">
             <img id="wfov-${index}" src="" alt="" style="display:none;" />
             <button type="button" class="delete-icon no-print" id="delete-wfov-${index}" onclick="deleteImage('wfov-${index}', 'wfov-input-${index}')">×</button>
           </div>
         </td>
-        <td><input type="text" class="remark-input" style="text-align: center;" placeholder="Deviation" /></td>
+        <td><input type="text" class="remark-input" style="text-align: center;" placeholder="0,0" /></td>
         <td class="tick-cell" onclick="toggleTick(this)"></td>
       `;
       tableBody.appendChild(row);

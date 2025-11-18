@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#4CAF50" />
+  
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -90,6 +89,8 @@
       <option value="voltage">NOCTVISION</option>
       <option value="Current Test">CLEARVISION</option>
       <option value="Continuity Test">WOLFSIGHT</option>
+      <option value="STE Visible & Laser">STE VIS-LRF</option>
+
     </select>
 
       <select id="status">
@@ -109,12 +110,7 @@
 
 <script>
   
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-      .then(reg => console.log('Service Worker Registered', reg))
-      .catch(err => console.error('SW registration failed:', err));
-  }
-
+ 
 
 function submitForm() {
   const project = document.getElementById('testType').value;
@@ -153,6 +149,13 @@ function submitForm() {
     filename = "testreswolfsight.html";
   }
 
+else if (project === "STE Visible & Laser" && testParam === "Pass") {
+    filename = "subassychkstevisible.html";
+  } else if (project === "STE Visible & Laser" && testParam === "Fail") {
+    filename = "intchkstevisible.html";
+  } else if (project === "STE Visible & Laser" && testParam === "Re-Test") {
+    filename = "testresstevisible.html";
+  }
   // If filename was matched, redirect
   if (filename) {
     window.location.href = filename;

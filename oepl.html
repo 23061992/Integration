@@ -90,6 +90,7 @@
       <option value="Current Test">CLEARVISION</option>
       <option value="Continuity Test">WOLFSIGHT</option>
       <option value="STE Visible & Laser">STE VIS-LRF</option>
+      <option value="STE Visible & SWIR ">STE VIS-SWIR</option>
 
     </select>
 
@@ -156,6 +157,13 @@ else if (project === "STE Visible & Laser" && testParam === "Pass") {
   } else if (project === "STE Visible & Laser" && testParam === "Re-Test") {
     filename = "testresstevisible.html";
   }
+  else if (project === "STE Visible & SWIR " && testParam === "Pass") {
+    filename = "subassychkste2visible.html";
+  } else if (project === "STE Visible & SWIR " && testParam === "Fail") {
+    filename = "intchkste2visible.html";
+  } else if (project === "STE Visible & SWIR " && testParam === "Re-Test") {
+    filename = "testresste2visible.html";
+  }
   // If filename was matched, redirect
   if (filename) {
     window.location.href = filename;
@@ -168,4 +176,3 @@ else if (project === "STE Visible & Laser" && testParam === "Pass") {
 
 </body>
 </html>
-
